@@ -9,7 +9,7 @@ namespace Antem.Models
     {
         private T id;
 
-        public virtual T ID
+        public virtual T Id
         {
             get { return id; }
             set { id = value; }

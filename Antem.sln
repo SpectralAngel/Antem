@@ -11,12 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Antem.Services", "Antem.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Antem.Web", "Antem.Web\Antem.Web.csproj", "{C78823B9-F742-46B2-AC8D-0A782985BB46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Antem.Test.Models", "Antem.Test.Models\Antem.Test.Models.csproj", "{0413A567-CD7B-4A05-B28B-9850B5B98477}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0413A567-CD7B-4A05-B28B-9850B5B98477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0413A567-CD7B-4A05-B28B-9850B5B98477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0413A567-CD7B-4A05-B28B-9850B5B98477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0413A567-CD7B-4A05-B28B-9850B5B98477}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1365A899-4667-4F62-8B76-3AD10B2E1866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1365A899-4667-4F62-8B76-3AD10B2E1866}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1365A899-4667-4F62-8B76-3AD10B2E1866}.Release|Any CPU.ActiveCfg = Release|Any CPU

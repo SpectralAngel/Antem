@@ -53,6 +53,7 @@
     <Compile Include="ContributionsAccount.cs" />
     <Compile Include="Beneficiary.cs" />
     <Compile Include="Charge.cs" />
+    <Compile Include="Exceptions\CannotWithdrawException.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="Product.cs" />
@@ -77,10 +78,7 @@
     <None Include="Modelos.cd" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Parts\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>

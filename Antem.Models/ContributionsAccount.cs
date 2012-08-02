@@ -7,17 +7,28 @@ namespace Antem.Models
 {
     public class ContributionsAccount : Account
     {
-        private DateTime liberation;
+        private DateTime liberation = DateTime.UtcNow;
+        private bool liberated = false;
+
+        public virtual bool Liberated
+        {
+            get { return liberated; }
+        }
 
         public virtual DateTime Liberation
         {
             get { return liberation; }
-            set { liberation = value; }
+        }
+
+        public void Liberate(DateTime day)
+        {
+            liberated = true;
+            liberation = day;
         }
     
         public override bool CanWithdraw()
         {
-            if (Liberation >= DateTime.Now)
+            if (Liberated && Liberation >= DateTime.UtcNow && Balance > 0)
             {
                 return true;
             }

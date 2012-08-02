@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Antem.Models.Exceptions;
 using Antem.Services;
 
 namespace Antem.Models
@@ -30,7 +31,6 @@ namespace Antem.Models
         public virtual decimal Balance
         {
             get { return balance; }
-            set { balance = value; }
         }
 
         public virtual DateTime Opened
@@ -62,8 +62,8 @@ namespace Antem.Models
             if (timespan.Days >= 30)
             {
                 var interest = Financial.InteresMensual(Rate, Balance);
-                Balance += interest;
-                LastCapitalization = DateTime.Now;
+                balance += interest;
+                LastCapitalization = DateTime.UtcNow;
 
                 var movement = new Movement()
                 {
@@ -81,12 +81,12 @@ namespace Antem.Models
 
         public Movement Deposit(decimal amount, Users user)
         {
-            Balance += amount;
+            balance += amount;
             var movement = new Movement()
             {
                 Account = this,
                 User = user,
-                Day = DateTime.Now,
+                Day = DateTime.UtcNow,
                 Amount = amount,
                 Type = "DEP",
                 InvoiceCreated = false
@@ -94,15 +94,19 @@ namespace Antem.Models
             return movement;
         }
 
-        public Movement Retirar(decimal monto, string ejecutor, Users user)
+        public Movement Withdraw(decimal amount, Users user)
         {
-            Balance -= monto;
+            if (!CanWithdraw())
+            {
+                throw new CannotWithdrawException();
+            }
+            balance -= amount;
             var movement = new Movement()
             {
                 Account = this,
                 User = user,
-                Day = DateTime.Now,
-                Amount = monto,
+                Day = DateTime.UtcNow,
+                Amount = amount,
                 Type = "RET",
                 InvoiceCreated = false
             };

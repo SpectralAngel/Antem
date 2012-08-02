@@ -9,7 +9,11 @@ namespace Antem.Models
     {
         public override bool CanWithdraw()
         {
-            return true;
+            if (Balance > 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

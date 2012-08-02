@@ -137,7 +137,7 @@ namespace Antem.Security
         {
             MembershipUser u = new MembershipUser(this.Name,
                                                   usr.Username,
-                                                  usr.ID,
+                                                  usr.Id,
                                                   usr.Email,
                                                   usr.PasswordQuestion,
                                                   usr.Comment,
