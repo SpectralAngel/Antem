@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Antem.Models
 {
@@ -9,7 +6,7 @@ namespace Antem.Models
     {
         private string name;
         private IList<Person> people = new List<Person>();
-        private IList<Country> counties = new List<Country>();
+        private IList<Town> towns = new List<Town>();
 
         public virtual string Name
         {
@@ -17,10 +14,10 @@ namespace Antem.Models
             set { name = value; }
         }
 
-        public virtual IList<Country> Counties
+        public virtual IList<Town> Towns
         {
-            get { return counties; }
-            set { counties = value; }
+            get { return towns; }
+            set { towns = value; }
         }
 
         public virtual IList<Person> People

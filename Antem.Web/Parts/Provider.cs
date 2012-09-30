@@ -1,6 +1,5 @@
 ﻿using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -10,6 +9,16 @@ namespace Antem.Parts
     public class Provider : IProvider
     {
         protected ISession session;
+
+        private static ISessionFactory SessionFactory = null;
+
+        public Provider()
+        {
+            if (SessionFactory == null)
+            {
+                SessionFactory = BuildSessionFactory();
+            }
+        }
 
         public ISession Session
         {
@@ -25,19 +34,18 @@ namespace Antem.Parts
             }
         }
 
-        private static ISessionFactory SessionFactory = null;
-
-        public Provider()
+        public virtual ISessionFactory BuildSessionFactory()
         {
-            if (SessionFactory == null)
-            {
-                SessionFactory = BuildSessionFactory();
-            }
-        }
-
-        protected static void UpdateSchema(Configuration config)
-        {
-            new SchemaUpdate(config).Execute(false, true);
+            AutoPersistenceModel bussiness = Provider.CreateBussinessMappings();
+            Configuration cfg = new Configuration();
+            cfg.Configure();
+            return Fluently.Configure(cfg)
+                .Mappings(m =>
+                {
+                    m.AutoMappings.Add(bussiness);
+                })
+                .ExposeConfiguration(UpdateSchema)
+                .BuildSessionFactory();
         }
 
         protected static AutoPersistenceModel CreateBussinessMappings()
@@ -70,17 +78,9 @@ namespace Antem.Parts
                 .Where(t => t.Namespace == "Antem.Models");
         }
 
-        public virtual ISessionFactory BuildSessionFactory()
+        protected static void UpdateSchema(Configuration config)
         {
-            AutoPersistenceModel bussiness = Provider.CreateBussinessMappings();
-            Configuration cfg = new Configuration();
-            cfg.Configure();
-            return Fluently.Configure(cfg)
-                .Mappings(m => {
-                    m.AutoMappings.Add(bussiness);
-                })
-                .ExposeConfiguration(UpdateSchema)
-                .BuildSessionFactory();
+            new SchemaUpdate(config).Execute(false, true);
         }
     }
 }

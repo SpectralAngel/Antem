@@ -1,4 +1,6 @@
-﻿using Antem.Parts;
+﻿using Antem.Composition.Mvc;
+using Antem.Models;
+using Antem.Parts;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -12,9 +14,6 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Security;
 using WebMatrix.WebData;
-using WebMatrix.WebData.Resources;
-using Antem.Models;
-using Antem.Composition.Mvc;
 
 namespace Antem.Membership
 {
@@ -22,21 +21,6 @@ namespace Antem.Membership
     {
         private const int TokenSizeInBytes = 16;
         private readonly MembershipProvider _previousProvider;
-
-        [Import]
-        private IRepository<Antem.Models.Membership> membershipRepository { get; set; }
-
-        [Import]
-        private IRepository<OAuthMembership> oAuthMembershipRepository { get; set; }
-
-        [Import]
-        private IRepository<OauthToken> oAuthTokenRepository { get; set; }
-
-        [Import]
-        private ExportFactory<IUnitOfWork> unitOfWork { get; set; }
-
-        [Import]
-        private IRepository<User> userRepository { get; set; }
 
         public SimpleMembershipProvider()
             : this(null)
@@ -158,6 +142,15 @@ namespace Antem.Membership
         // represents the User table for the app
         public string UserTableName { get; set; }
 
+        [Import]
+        private IRepository<Antem.Models.Membership> membershipRepository { get; set; }
+
+        [Import]
+        private IRepository<OAuthMembership> oAuthMembershipRepository { get; set; }
+
+        [Import]
+        private IRepository<OauthToken> oAuthTokenRepository { get; set; }
+
         private MembershipProvider PreviousProvider
         {
             get
@@ -172,6 +165,13 @@ namespace Antem.Membership
                 }
             }
         }
+
+        [Import]
+        private ExportFactory<IUnitOfWork> unitOfWork { get; set; }
+
+        [Import]
+        private IRepository<User> userRepository { get; set; }
+
         // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
@@ -1034,6 +1034,7 @@ namespace Antem.Membership
             CompositionProvider.Current.SatisfyImports(this);
             InitializeCalled = true;
         }
+
         private static string GenerateToken()
         {
             using (var prng = new RNGCryptoServiceProvider())
@@ -1141,6 +1142,7 @@ namespace Antem.Membership
                 }
             }
         }
+
         private string GetHashedPassword(User user)
         {
             var membership = membershipRepository.Where(m => m.User == user).Single();
@@ -1172,6 +1174,7 @@ namespace Antem.Membership
                 }
             }
         }
+
         // Ensures the user exists in the accounts table
         private User VerifyUserNameHasConfirmedAccount(string username, bool throwException)
         {

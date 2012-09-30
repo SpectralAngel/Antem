@@ -10,7 +10,7 @@ namespace Antem.Models
         private Affiliate affiliate;
         private string place;
         private string description;
-        private Country county;
+        private Town town;
         private State state;
 
         public virtual Affiliate Affiliate
@@ -25,10 +25,10 @@ namespace Antem.Models
             set { place = value; }
         }
 
-        public virtual Country County
+        public virtual Town Town
         {
-            get { return county; }
-            set { county = value; }
+            get { return town; }
+            set { town = value; }
         }
 
         public virtual string Description

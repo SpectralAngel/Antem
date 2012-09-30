@@ -63,7 +63,7 @@
     <Compile Include="State.cs" />
     <Compile Include="Address.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="Country.cs" />
+    <Compile Include="Town.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Loan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

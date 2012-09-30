@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Antem.Models
 {
-    public class Country : Entity<int>
+    public class Town : Entity<int>
     {
         private string name;
         private State state;
