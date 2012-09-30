@@ -672,6 +672,7 @@ namespace Antem.Membership
         // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
+            VerifyInitialized();
             if (!InitializeCalled)
             {
                 return PreviousProvider.GetUser(providerUserKey, userIsOnline);
@@ -984,6 +985,7 @@ namespace Antem.Membership
         // Inherited from MembershipProvider ==> Forwarded to previous provider if this provider hasn't been initialized
         public override bool ValidateUser(string username, string password)
         {
+            VerifyInitialized();
             if (!InitializeCalled)
             {
                 return PreviousProvider.ValidateUser(username, password);
