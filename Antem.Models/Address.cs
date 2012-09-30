@@ -7,10 +7,17 @@ namespace Antem.Models
 {
     public class Address : Entity<int>
     {
+        private Affiliate affiliate;
         private string place;
         private string description;
-        private County county;
+        private Country county;
         private State state;
+
+        public virtual Affiliate Affiliate
+        {
+            get { return affiliate; }
+            set { affiliate = value; }
+        }
 
         public virtual string Place
         {
@@ -18,7 +25,7 @@ namespace Antem.Models
             set { place = value; }
         }
 
-        public virtual County County
+        public virtual Country County
         {
             get { return county; }
             set { county = value; }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Antem.Models
 {
-    public class ContributionsAccount : Account
+    public class ContributionsAccount : SavingAccount
     {
         private DateTime liberation = DateTime.UtcNow;
         private bool liberated = false;
@@ -20,12 +20,12 @@ namespace Antem.Models
             get { return liberation; }
         }
 
-        public void Liberate(DateTime day)
+        public virtual void Liberate(DateTime day)
         {
             liberated = true;
             liberation = day;
         }
-    
+
         public override bool CanWithdraw()
         {
             if (Liberated && Liberation >= DateTime.UtcNow && Balance > 0)

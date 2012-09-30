@@ -13,49 +13,53 @@ namespace Antem.Test.Models
     class ContributionsAccountTest
     {
         ContributionsAccount account;
-        Users user;
+        User user;
+        decimal initialDeposit = 2000;
+        decimal exchangeAmount = 500;
+        decimal overWithdrawal = 3000;
+        decimal balanceAfterWithdrawal;
+        decimal balanceAfterDeposit;
 
         [SetUp]
         public void Init()
         {
-            user = new Users()
+            user = new User()
             {
                 Username = "Test"
             };
+            balanceAfterDeposit = initialDeposit + exchangeAmount;
+            balanceAfterWithdrawal = initialDeposit - exchangeAmount;
             account = new ContributionsAccount();
-            account.Deposit(2000, user);
+            account.Deposit(initialDeposit, user);
         }
 
         [Test]
         public void Deposit()
         {
-            account.Deposit(500, user);
-            Assert.AreEqual(account.Balance, 2500);
-        }
-
-        [Test]
-        public void MovementCreation()
-        {
-            var movement = account.Deposit(500, user);
-            Assert.AreEqual(movement.Amount, 500);
-            Assert.AreEqual(movement.Account, account);
-            Assert.AreEqual(movement.User, user);
-            Assert.LessOrEqual(movement.Day, DateTime.UtcNow);
+            account.Deposit(exchangeAmount, user);
+            Assert.AreEqual(balanceAfterDeposit, account.Balance);
         }
 
         [Test]
         public void Withdraw()
         {
             account.Liberate(DateTime.UtcNow);
-            var movement = account.Withdraw(500, user);
-            Assert.AreEqual(account.Balance, 1500);
+            account.Withdraw(exchangeAmount, user);
+            Assert.AreEqual(balanceAfterWithdrawal, account.Balance);
         }
 
         [Test]
         [ExpectedException(typeof(CannotWithdrawException))]
         public void WithdrawBeforeLiberation()
         {
-            var movement = account.Withdraw(500, user);
+            account.Withdraw(exchangeAmount, user);
+        }
+
+        [Test]
+        [ExpectedException(typeof(CannotWithdrawException))]
+        public void WithdrawOverBalance()
+        {
+            account.Withdraw(overWithdrawal, user);
         }
     }
 }

@@ -13,6 +13,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,12 +36,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections">
-      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,39 +52,40 @@
     <Compile Include="Exceptions\CannotWithdrawException.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="Email.cs" />
+    <Compile Include="Membership.cs" />
+    <Compile Include="OAuthMembership.cs" />
+    <Compile Include="OauthToken.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="Product.cs" />
-    <Compile Include="Account.cs" />
+    <Compile Include="SavingAccount.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="State.cs" />
     <Compile Include="Address.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="County.cs" />
+    <Compile Include="Country.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Loan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Retention.cs" />
     <Compile Include="AppliedRetention.cs" />
     <Compile Include="WithdrawableAccount.cs" />
-    <Compile Include="Roles.cs" />
     <Compile Include="PhoneNumber.cs" />
     <Compile Include="Movement.cs" />
-    <Compile Include="Users.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Modelos.cd" />
+    <None Include="Models.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Antem.Services\Antem.Services.csproj">
+    <ProjectReference Include="..\Antem.Services\Antem.Parts.csproj">
       <Project>{20d868c3-f234-40aa-b79d-5c31a8284cb9}</Project>
-      <Name>Antem.Services</Name>
+      <Name>Antem.Parts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Composition;
+using System.Linq;
+using System.Reflection;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Antem.Composition.Mvc
+{
+    class CompositionScopeDependencyResolver : IDependencyResolver
+    {
+        public object GetService(Type serviceType)
+        {
+            object export;
+            if (!CompositionProvider.Current.TryGetExport(serviceType, null, out export))
+                return null;
+
+            return export;
+        }
+
+        public IEnumerable<object> GetServices(Type serviceType)
+        {
+            return CompositionProvider.Current.GetExports(serviceType);
+        }
+    }
+}

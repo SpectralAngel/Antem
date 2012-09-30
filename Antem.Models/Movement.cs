@@ -9,9 +9,10 @@ namespace Antem.Models
     {
         private decimal amount;
         private DateTime day;
-        private Account account;
-        private Users user;
+        private SavingAccount account;
+        private User user;
         private string type;
+        private bool invoiceCreated;
 
         public virtual decimal Amount
         {
@@ -25,13 +26,13 @@ namespace Antem.Models
             set { day = value; }
         }
 
-        public virtual Account Account
+        public virtual SavingAccount Account
         {
             get { return account; }
             set { account = value; }
         }
 
-        public Users User
+        public virtual User User
         {
             get { return user; }
             set { user = value; }
@@ -42,8 +43,6 @@ namespace Antem.Models
             get { return type; }
             set { type = value; }
         }
-
-        private bool invoiceCreated;
 
         public virtual bool InvoiceCreated
         {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Antem.Models
 {
-    public class WithdrawableAccount : Account
+    public class WithdrawableAccount : SavingAccount
     {
         public override bool CanWithdraw()
         {

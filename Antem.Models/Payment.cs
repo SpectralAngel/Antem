@@ -6,7 +6,7 @@ using System.Text;
 namespace Antem.Models
 {
     /// <summary>
-    /// Registra los pagos que se han efectuado a un <see cref="Loan"/>
+    /// Represents an amount applied to a <see cref="Loan"/>
     /// </summary>
     public class Payment : Entity<int>
     {
@@ -15,7 +15,7 @@ namespace Antem.Models
         private decimal amount;
         private decimal principal;
         private decimal interest;
-        private Invoice invoice;
+        private bool invoiceCreated;
 
         public virtual DateTime Day
         {
@@ -41,16 +41,16 @@ namespace Antem.Models
             set { interest = value; }
         }
 
-        public virtual Invoice Invoice
-        {
-            get { return invoice; }
-            set { invoice = value; }
-        }
-
         public virtual Loan Loan
         {
             get { return loan; }
             set { loan = value; }
+        }
+
+        public virtual bool InvoiceCreated
+        {
+            get { return invoiceCreated; }
+            set { invoiceCreated = value; }
         }
     }
 }

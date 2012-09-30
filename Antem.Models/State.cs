@@ -9,15 +9,15 @@ namespace Antem.Models
     {
         private string name;
         private IList<Person> people = new List<Person>();
-        private IList<County> counties = new List<County>();
+        private IList<Country> counties = new List<Country>();
 
-        public string Name
+        public virtual string Name
         {
             get { return name; }
             set { name = value; }
         }
 
-        public virtual IList<County> Counties
+        public virtual IList<Country> Counties
         {
             get { return counties; }
             set { counties = value; }

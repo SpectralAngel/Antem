@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Antem.Models
 {
+    /// <summary>
+    /// Represents a money transaction made on an <see cref="Invoice"/>
+    /// </summary>
     public class Charge : Entity<int>
     {
         private Invoice invoice;
@@ -17,13 +20,13 @@ namespace Antem.Models
             set { amount = value; }
         }
 
-        public virtual Product Concepto
+        public virtual Product Product
         {
             get { return product; }
             set { product = value; }
         }
 
-        public virtual Invoice Comprobante
+        public virtual Invoice Invoice
         {
             get { return invoice; }
             set { invoice = value; }

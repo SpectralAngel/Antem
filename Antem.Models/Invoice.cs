@@ -6,14 +6,20 @@ using System.Text;
 namespace Antem.Models
 {
     /// <summary>
-    /// Permite registrar los diversos movimientos de caja
+    /// Documents the diverse Cashier Movements
     /// </summary>
     public class Invoice : Entity<int>
     {
         private Affiliate affiliate;
         private DateTime day;
         private IList<Charge> cargos = new List<Charge>();
-        private bool isOutcome;
+        private User cashier;
+
+        public virtual User Cashier
+        {
+            get { return cashier; }
+            set { cashier = value; }
+        }
 
         public virtual Affiliate Affiliate
         {
@@ -21,28 +27,22 @@ namespace Antem.Models
             set { affiliate = value; }
         }
 
-        public virtual DateTime Fecha
+        public virtual DateTime Day
         {
             get { return day; }
             set { day = value; }
         }
 
-        public virtual IList<Charge> Cargos
+        public virtual IList<Charge> Charges
         {
             get { return cargos; }
             set { cargos = value; }
         }
 
-        public bool IsOutome
-        {
-            get { return isOutcome; }
-            set { isOutcome = value; }
-        }
-
         /// <summary>
-        /// Calcula el total de la transacción registrada
+        /// Calculates the total of the Invoice
         /// </summary>
-        public decimal Total
+        public virtual decimal Total
         {
             get
             {

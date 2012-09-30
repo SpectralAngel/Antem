@@ -9,6 +9,7 @@ namespace Antem.Models
     {
         private string name;
         private IList<Charge> charges = new List<Charge>();
+        private bool isOutcome;
 
         public virtual IList<Charge> Charges
         {
@@ -20,6 +21,12 @@ namespace Antem.Models
         {
             get { return name; }
             set { name = value; }
+        }
+
+        public virtual bool IsOutcome
+        {
+            get { return isOutcome; }
+            set { isOutcome = value; }
         }
     }
 }
