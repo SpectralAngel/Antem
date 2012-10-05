@@ -54,6 +54,10 @@ namespace Antem.Parts
                 .AssemblyOf<Antem.Models.Person>()
                 .IgnoreBase(typeof(Antem.Models.Entity<>))
                 .IncludeBase<Antem.Models.SavingAccount>()
+                .Override<Antem.Models.Person>(map =>
+                {
+                    map.IgnoreProperty(x => x.Age);
+                })
                 .Override<Antem.Models.Loan>(map =>
                 {
                     map.IgnoreProperty(x => x.Balance);

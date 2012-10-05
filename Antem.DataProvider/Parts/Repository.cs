@@ -47,7 +47,7 @@ namespace Antem.Parts
             get { return Session.Query<T>().Provider; }
         }
 
-        public void Add(T entity)
+        public void Save(T entity)
         {
             Session.Save(entity);
         }

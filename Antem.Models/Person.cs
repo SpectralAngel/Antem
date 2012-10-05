@@ -19,7 +19,7 @@ namespace Antem.Models
         private string civilState;
         private string profession;
         private State state;
-        private Town county;
+        private Town town;
         private IList<PhoneNumber> phoneNumbers = new List<PhoneNumber>();
         private IList<Address> addresses = new List<Address>();
         private IList<Email> emails = new List<Email>();
@@ -74,10 +74,10 @@ namespace Antem.Models
             set { state = value; }
         }
 
-        public virtual Town County
+        public virtual Town Town
         {
-            get { return county; }
-            set { county = value; }
+            get { return town; }
+            set { town = value; }
         }
 
         public virtual IList<PhoneNumber> PhoneNumbers
@@ -96,6 +96,14 @@ namespace Antem.Models
         {
             get { return emails; }
             set { emails = value; }
+        }
+
+        public virtual int Age
+        {
+            get
+            {
+                return (DateTime.UtcNow - birthday).Days / 365;
+            }
         }
     }
 }

@@ -7,7 +7,7 @@
       <FileName>Account.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Affiliate" />
+      <Property Name="Member" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.Address">
@@ -17,14 +17,14 @@
       <FileName>Address.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Affiliate" />
+      <Property Name="Member" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Antem.Models.Affiliate">
+  <Class Name="Antem.Models.Member">
     <Position X="38.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAQAAAAABAAAAAUBAAABAQAIAAAACQAAAAECAAAEA=</HashCode>
-      <FileName>Affiliate.cs</FileName>
+      <FileName>Member.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Property Name="Accounts" />
@@ -48,7 +48,7 @@
       <FileName>Beneficiary.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="affiliate" />
+      <Field Name="Member" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.Charge">
@@ -105,7 +105,7 @@
       <FileName>Invoice.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Affiliate" />
+      <Property Name="Member" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Charges" />
@@ -118,7 +118,7 @@
       <FileName>Loan.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Affiliate" />
+      <Property Name="Member" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.Movement">

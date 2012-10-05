@@ -7,16 +7,16 @@ namespace Antem.Models
 {
     public class Address : Entity<int>
     {
-        private Affiliate affiliate;
+        private Member member;
         private string place;
         private string description;
         private Town town;
         private State state;
 
-        public virtual Affiliate Affiliate
+        public virtual Member Member
         {
-            get { return affiliate; }
-            set { affiliate = value; }
+            get { return member; }
+            set { member = value; }
         }
 
         public virtual string Place

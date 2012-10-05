@@ -7,7 +7,7 @@ namespace Antem.Models
 {
     public class Beneficiary : Entity<int>
     {
-        private Affiliate affiliate;
+        private Member member;
         private string name;
         private double percent;
 
@@ -23,10 +23,10 @@ namespace Antem.Models
             set { percent = value; }
         }
 
-        public virtual Affiliate Affiliate
+        public virtual Member Member
         {
-            get { return affiliate; }
-            set { affiliate = value; }
+            get { return member; }
+            set { member = value; }
         }
     }
 }

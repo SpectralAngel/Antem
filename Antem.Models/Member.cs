@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Antem.Models
 {
-    public class Affiliate : Person
+    public class Member : Person
     {
-        private DateTime joined;
-        private Boolean isActive;
-        private DateTime retirement;
+        private Branch branch;
+        private DateTime joined = DateTime.UtcNow;
+        private bool active = true;
+        private DateTime retirement = DateTime.MinValue;
         private IList<SavingAccount> accounts = new List<SavingAccount>();
         private IList<Beneficiary> beneficiaries = new List<Beneficiary>();
-        private IList<Invoice> invoices;
-        private IList<Loan> loans;
+        private IList<Invoice> invoices = new List<Invoice>();
+        private IList<Loan> loans = new List<Loan>();
+
+        public virtual Branch Branch
+        {
+            get { return branch; }
+            set { branch = value; }
+        }
 
         public virtual IList<Loan> Loans
         {
@@ -45,10 +50,10 @@ namespace Antem.Models
             set { retirement = value; }
         }
 
-        public virtual Boolean IsActive
+        public virtual bool IsActive
         {
-            get { return isActive; }
-            set { isActive = value; }
+            get { return active; }
+            set { active = value; }
         }
 
         public virtual DateTime Joined

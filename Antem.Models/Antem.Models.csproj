@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Affiliate.cs" />
+    <Compile Include="Member.cs" />
     <Compile Include="ContributionsAccount.cs" />
     <Compile Include="Beneficiary.cs" />
     <Compile Include="Charge.cs" />

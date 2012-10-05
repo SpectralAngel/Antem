@@ -10,7 +10,7 @@ namespace Antem.Models
     /// </summary>
     public class Invoice : Entity<int>
     {
-        private Affiliate affiliate;
+        private Member member;
         private DateTime day;
         private IList<Charge> cargos = new List<Charge>();
         private User cashier;
@@ -21,10 +21,10 @@ namespace Antem.Models
             set { cashier = value; }
         }
 
-        public virtual Affiliate Affiliate
+        public virtual Member Member
         {
-            get { return affiliate; }
-            set { affiliate = value; }
+            get { return member; }
+            set { member = value; }
         }
 
         public virtual DateTime Day

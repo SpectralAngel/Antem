@@ -12,7 +12,7 @@ namespace Antem.Models
     /// </summary>
     public abstract class SavingAccount : Entity<int>
     {
-        private Affiliate affiliate;
+        private Member member;
         private int number;
         private double rate;
         private decimal balance = 0;
@@ -20,12 +20,12 @@ namespace Antem.Models
         private DateTime lastCapitalization = DateTime.UtcNow;
 
         /// <summary>
-        /// The <see cref="Affiliate"/> that holds the <see cref="SavingAccount"/>
+        /// The <see cref="Member"/> that holds the <see cref="SavingAccount"/>
         /// </summary>
-        public virtual Affiliate Affiliate
+        public virtual Member Member
         {
-            get { return affiliate; }
-            set { affiliate = value; }
+            get { return member; }
+            set { member = value; }
         }
 
         /// <summary>

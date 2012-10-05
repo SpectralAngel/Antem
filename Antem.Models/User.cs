@@ -9,15 +9,21 @@ namespace Antem.Models
     public class User : Entity<int>
     {
         private string username;
+        private Branch branch;
+        private IList<Role> roles = new List<Role>();
+        private IList<Membership> memberships = new List<Membership>();
+        
+        public virtual Branch Branch
+        {
+            get { return branch; }
+            set { branch = value; }
+        }
 
         public virtual string Username
         {
             get { return username; }
             set { username = value; }
         }
-        private IList<Role> roles = new List<Role>();
-
-        private IList<Membership> memberships = new List<Membership>();
 
         public virtual IList<Role> Roles
         {

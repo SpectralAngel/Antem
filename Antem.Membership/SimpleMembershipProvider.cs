@@ -228,7 +228,7 @@ namespace Antem.Membership
                     if (String.Equals(accountConfirmationToken, membership.ConfirmationToken, StringComparison.Ordinal))
                     {
                         membership.IsConfirmed = true;
-                        membershipRepository.Add(membership);
+                        membershipRepository.Save(membership);
                         unit.Commit();
                         return true;
                     }
@@ -261,7 +261,7 @@ namespace Antem.Membership
                 membership.IsConfirmed = true;
                 try
                 {
-                    membershipRepository.Add(membership);
+                    membershipRepository.Save(membership);
                     unit.Commit();
                     return membership.IsConfirmed;
                 }
@@ -331,7 +331,7 @@ namespace Antem.Membership
                 };
                 try
                 {
-                    membershipRepository.Add(membership);
+                    membershipRepository.Save(membership);
                     unit.Commit();
                 }
                 catch
@@ -362,7 +362,7 @@ namespace Antem.Membership
                         ProviderUserId = providerUserId,
                         User = user
                     };
-                    oAuthMembershipRepository.Add(oauth);
+                    oAuthMembershipRepository.Save(oauth);
                 }
                 else
                 {
@@ -948,7 +948,7 @@ namespace Antem.Membership
                                         Token = requestToken,
                                         Secret = requestTokenSecret
                                     };
-                        oAuthTokenRepository.Add(token);
+                        oAuthTokenRepository.Save(token);
                         unit.Commit();
                     }
                     catch (Exception)
@@ -1133,7 +1133,7 @@ namespace Antem.Membership
                 }
                 try
                 {
-                    userRepository.Add(user);
+                    userRepository.Save(user);
                     unit.Commit();
                 }
                 catch

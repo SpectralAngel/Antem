@@ -8,11 +8,11 @@ namespace Antem.Models
 {
     /// <summary>
     /// Allows management of amounts of money that are loaned to
-    /// <see cref="Affiliate"/>s
+    /// <see cref="Member"/>s
     /// </summary>
     public class Loan : Entity<int>
     {
-        private Affiliate affiliate;
+        private Member member;
         private decimal principal;
         private decimal cuota;
         private DateTime given;
@@ -22,10 +22,10 @@ namespace Antem.Models
         private IList<Payment> payments = new List<Payment>();
         private IList<AppliedRetention> retentions = new List<AppliedRetention>();
 
-        public virtual Affiliate Affiliate
+        public virtual Member Member
         {
-            get { return affiliate; }
-            set { affiliate = value; }
+            get { return member; }
+            set { member = value; }
         }
 
         public virtual decimal Principal

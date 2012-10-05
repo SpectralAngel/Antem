@@ -13,7 +13,7 @@ namespace Antem.Parts
         /// Adds a new object to the storage
         /// </summary>
         /// <param name="Entity">The object to store</param>
-        void Add(T Entity);
+        void Save(T Entity);
 
         /// <summary>
         /// Obtains an Entity from the storage
