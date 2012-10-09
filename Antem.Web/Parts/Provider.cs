@@ -8,7 +8,7 @@ namespace Antem.Parts
 {
     public class Provider : IProvider
     {
-        protected ISession session;
+        private static ISession session;
 
         private static ISessionFactory SessionFactory = null;
 

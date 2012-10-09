@@ -8,51 +8,41 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Antem.Web.Controllers
+namespace Antem.Web.Controllers.API
 {
-    public class TownController : ApiController
+    public class StateController : ApiController
     {
-        IRepository<Town> repository { get; set; }
-        IRepository<State> states { get; set; }
+        IRepository<State> repository;
         ExportFactory<IUnitOfWork> unitFactory;
 
         [ImportingConstructor]
-        public TownController(IRepository<Town> repo,
-            IRepository<State> states,
+        public StateController(IRepository<State> repo,
             ExportFactory<IUnitOfWork> factory)
         {
             repository = repo;
-            this.states = states;
             unitFactory = factory;
         }
 
-        // GET api/town
-        public IQueryable<Town> Get()
+        // GET api/state
+        public IQueryable<State> Get()
         {
             return repository;
         }
 
-        [HttpGet]
-        public IEnumerable<Town> State(int id)
-        {
-            return repository.Where(t => t.State.Id == id);
-        }
-
-        // GET api/town/5
-        public Town Get(int id)
+        // GET api/state/5
+        public State Get(int id)
         {
             return repository.Get(id);
         }
 
-        // POST api/town
-        public void Post(Town town, int state)
+        // POST api/state
+        public void Post(State state)
         {
             using (var unitOfWork = unitFactory.CreateExport().Value)
             {
                 try
                 {
-                    town.State = states.Get(state);
-                    repository.Save(town);
+                    repository.Save(state);
                     unitOfWork.Commit();
                 }
                 catch (Exception)
@@ -63,28 +53,28 @@ namespace Antem.Web.Controllers
             }
         }
 
-        // PUT api/town/5
-        public void Put(int id, Town town)
+        // PUT api/state/5
+        public void Put(State state)
         {
             throw new NotImplementedException();
         }
 
-        // DELETE api/town/5
+        // DELETE api/state/5
         public void Delete(int id)
         {
             using (var unitOfWork = unitFactory.CreateExport().Value)
             {
                 try
                 {
-                    var town = repository.Get(id);
-                    repository.Delete(town);
+                    var state = repository.Get(id);
+                    repository.Delete(state);
                     unitOfWork.Commit();
                 }
                 catch (Exception)
                 {
                     unitOfWork.Rollback();
                     throw;
-                }
+                } 
             }
         }
     }

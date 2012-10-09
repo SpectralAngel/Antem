@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Antem.Web.Controllers
+namespace Antem.Web.Controllers.API
 {
     public class BranchController : ApiController
     {

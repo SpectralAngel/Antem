@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Branch.cs" />
     <Compile Include="Member.cs" />
     <Compile Include="ContributionsAccount.cs" />
     <Compile Include="Beneficiary.cs" />

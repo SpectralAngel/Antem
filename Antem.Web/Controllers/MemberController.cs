@@ -1,5 +1,7 @@
 ﻿using Antem.Models;
 using Antem.Parts;
+using Antem.Web.Models.UI;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Composition;
@@ -12,14 +14,17 @@ namespace Antem.Web.Controllers
 {
     public class MemberController : Controller
     {
-        IRepository<Member> repository { get; set; }
+        IRepository<Member> repository;
+        ExportFactory<IUnitOfWork> factory;
         //
         // GET: /Member/
 
         [ImportingConstructor]
-        public MemberController(IRepository<Member> repo)
+        public MemberController(IRepository<Member> repo,
+            ExportFactory<IUnitOfWork> factory)
         {
             repository = repo;
+            this.factory = factory;
         }
 
         public ActionResult Index()
@@ -51,17 +56,22 @@ namespace Antem.Web.Controllers
         // POST: /Member/Create
 
         [HttpPost]
-        public ActionResult Create(Member member)
+        public ActionResult Create(MemberEditModel member)
         {
-            try
+            using (var unitOfWork = factory.CreateExport().Value)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                try
+                {
+                    var newMember = Mapper.Map<MemberEditModel, Member>(member);
+                    repository.Save(newMember);
+                    unitOfWork.Commit();
+                    return RedirectToAction("Index");
+                }
+                catch(Exception ex)
+                {
+                    unitOfWork.Rollback();
+                    throw ex;
+                }
             }
         }
 
@@ -78,37 +88,11 @@ namespace Antem.Web.Controllers
         // POST: /Member/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Member member)
         {
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Member/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Member/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             }
