@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Antem.Web.Parts.Resolvers
 {
-    public abstract class RepositoryResolver<TSource, TDestination> : ValueResolver<TSource, TDestination>
+    public abstract class RepositoryResolver<TSource, TDestination> : ValueResolver<TSource, TDestination> where TDestination : class
     {
         protected IRepository<TDestination> repository;
 

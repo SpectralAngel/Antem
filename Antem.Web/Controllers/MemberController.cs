@@ -1,6 +1,6 @@
 ﻿using Antem.Models;
 using Antem.Parts;
-using Antem.Web.Models.UI;
+using Antem.Web.Models;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -56,13 +56,13 @@ namespace Antem.Web.Controllers
         // POST: /Member/Create
 
         [HttpPost]
-        public ActionResult Create(MemberEditModel member)
+        public ActionResult Create(MemberViewModel member)
         {
             using (var unitOfWork = factory.CreateExport().Value)
             {
                 try
                 {
-                    var newMember = Mapper.Map<MemberEditModel, Member>(member);
+                    var newMember = Mapper.Map<MemberViewModel, Member>(member);
                     repository.Save(newMember);
                     unitOfWork.Commit();
                     return RedirectToAction("Index");

@@ -3,12 +3,13 @@ using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using System;
 
 namespace Antem.Parts
 {
-    public class Provider : IProvider
+    public class Provider : IProvider, IDisposable
     {
-        private static ISession session;
+        private ISession session;
 
         private static ISessionFactory SessionFactory = null;
 
@@ -84,7 +85,29 @@ namespace Antem.Parts
 
         protected static void UpdateSchema(Configuration config)
         {
-            new SchemaUpdate(config).Execute(false, true);
+            new SchemaUpdate(config).Execute(true, true);
+        }
+
+        ~Provider()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (session != null)
+                {
+                    session.Dispose();
+                }
+            }
         }
     }
 }

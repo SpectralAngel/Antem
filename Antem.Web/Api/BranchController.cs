@@ -15,6 +15,11 @@ namespace Antem.Web.Controllers.API
         IRepository<Branch> repository;
         ExportFactory<IUnitOfWork> factory;
 
+        public BranchController(IRepository<Branch> repo)
+        {
+
+        }
+
         // GET api/branch
         public IQueryable<Branch> Get()
         {

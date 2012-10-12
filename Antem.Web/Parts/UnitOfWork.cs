@@ -12,10 +12,11 @@ namespace Antem.Parts
     public sealed class UnitOfWork : IUnitOfWork
     {
         ITransaction transaction;
+        Provider provider;
 
         public UnitOfWork(IProvider dataProvider)
         {
-            var provider = dataProvider as Provider;
+            provider = dataProvider as Provider;
             if (provider == null)
                 throw new Exception("Invalid Data Provider");
             transaction = provider.Session.BeginTransaction();
@@ -23,6 +24,7 @@ namespace Antem.Parts
 
         public void Commit()
         {
+            provider.Session.Flush();
             transaction.Commit();
         }
 
@@ -56,6 +58,11 @@ namespace Antem.Parts
                     transaction = null;
                 }
             }
+        }
+
+        public bool isActive
+        {
+            get { return transaction.IsActive; }
         }
     }
 }

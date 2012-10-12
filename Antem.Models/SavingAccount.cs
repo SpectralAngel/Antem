@@ -13,8 +13,10 @@ namespace Antem.Models
     public abstract class SavingAccount : Entity<int>
     {
         private Member member;
+        private Branch branch;
         private int number;
-        private double rate;
+        private string code;
+        protected double rate;
         private decimal balance = 0;
         private DateTime opened = DateTime.UtcNow;
         private DateTime lastCapitalization = DateTime.UtcNow;
@@ -28,6 +30,12 @@ namespace Antem.Models
             set { member = value; }
         }
 
+        public virtual Branch Branch
+        {
+            get { return branch; }
+            set { branch = value; }
+        }
+
         /// <summary>
         /// The code that is printed in the holder's card
         /// </summary>
@@ -35,6 +43,12 @@ namespace Antem.Models
         {
             get { return number; }
             set { number = value; }
+        }
+
+        public virtual string Code
+        {
+            get { return code; }
+            set { code = value; }
         }
 
         /// <summary>
@@ -137,6 +151,14 @@ namespace Antem.Models
                 InvoiceCreated = false
             };
             return movement;
+        }
+
+        public virtual void GenerateCode()
+        {
+            if (String.IsNullOrEmpty(code))
+            {
+                code = string.Format("{0}{1:d5}{2:d}", member.Branch.Id, member.Id, Id);
+            }
         }
     }
 }

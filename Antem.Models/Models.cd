@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Antem.Models.Account">
-    <Position X="1.5" Y="1.75" Width="1.5" />
+  <Class Name="Antem.Models.SavingAccount">
+    <Position X="13.75" Y="5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>YAAACEAAAAAAQAAAAEgAAAAMGCAAABgAAAAAAABAAAI=</HashCode>
-      <FileName>Account.cs</FileName>
+      <HashCode>YAAACEAAAAAAQAAAAEgAAAAMECAIABAACAAAAABAAAI=</HashCode>
+      <FileName>SavingAccount.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Member" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.Address">
-    <Position X="14" Y="1.75" Width="1.5" />
+    <Position X="3.5" Y="9.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAgAAAAJAAAAAQACAAAQAgEAEAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAgAgAAIAIAAAAAAAAAAIQAAECEAABAAAAAA=</HashCode>
       <FileName>Address.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -21,38 +21,38 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.Member">
-    <Position X="38.75" Y="3.25" Width="1.5" />
+    <Position X="9.5" Y="11.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAQAAAAABAAAAAUBAAABAQAIAAAACQAAAAECAAAEA=</HashCode>
+      <HashCode>IAAAQAAAAABAAAAAUBAAAAAQCIAAAAiQAAAAMCAAAEA=</HashCode>
       <FileName>Member.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Accounts" />
+      <Field Name="accounts" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Antem.Models.AppliedRetention">
-    <Position X="27.5" Y="1.75" Width="1.5" />
+    <Position X="9.5" Y="17" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAEgAAABIAAAAAAAAAAACAAAAAgAAAAAAAAAEAAAA=</HashCode>
       <FileName>AppliedRetention.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Loan" />
       <Property Name="Retention" />
+      <Property Name="Loan" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.Beneficiary">
-    <Position X="36.5" Y="1.75" Width="1.5" />
+    <Position X="6.5" Y="12.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQACAAEAAgIAAAACAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAMAAAICAAACAAAAAA=</HashCode>
       <FileName>Beneficiary.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="Member" />
+      <Property Name="Member" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.Charge">
-    <Position X="5" Y="1.75" Width="1.5" />
+    <Position X="3.5" Y="16" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAADAAAAAgAAAAAAAAAAAACAAAAAgAAAAAAAAAAAAQA=</HashCode>
       <FileName>Charge.cs</FileName>
@@ -62,17 +62,17 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.ContributionsAccount">
-    <Position X="0.5" Y="7" Width="1.5" />
+    <Position X="12.5" Y="10.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAIAAAgCAAAAAAABAAAA=</HashCode>
       <FileName>ContributionsAccount.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Antem.Models.County">
-    <Position X="20.75" Y="1.75" Width="1.5" />
+  <Class Name="Antem.Models.Town">
+    <Position X="9" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAIAAAAAAAAAAAAQAAAAEAAAEAAAABAAAAAA=</HashCode>
-      <FileName>County.cs</FileName>
+      <FileName>Town.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="State" />
@@ -82,7 +82,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Antem.Models.Email">
-    <Position X="29.75" Y="1.75" Width="1.5" />
+    <Position X="6.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAIBAAACAQAAAACAAAA=</HashCode>
       <FileName>Email.cs</FileName>
@@ -91,17 +91,10 @@
       <Property Name="Person" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Antem.Models.Entity&lt;T&gt;" Collapsed="true">
-    <Position X="20.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
-      <FileName>Entity.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Antem.Models.Invoice">
-    <Position X="7.25" Y="1.75" Width="1.5" />
+    <Position X="6.5" Y="16.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAIAAAAAAAAgAAAAAACAAAQggAAAAAAYAAAAA=</HashCode>
+      <HashCode>AAAgAAAAIAAIAAAACAAAAAAAAAAIQAAACAAAAYAAAAA=</HashCode>
       <FileName>Invoice.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -112,29 +105,29 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Antem.Models.Loan">
-    <Position X="16.25" Y="1.75" Width="1.5" />
+    <Position X="12.5" Y="14.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>QAAYAEAAAABAACAAAAgAAAAICAAACAoAAAACAAAAGAA=</HashCode>
+      <HashCode>QAAcIUAAARBAgCAgAEgAAABIAACICAIAiAACAAAAGAA=</HashCode>
       <FileName>Loan.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Member" />
+      <Field Name="member" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.Movement">
-    <Position X="23" Y="1.75" Width="1.5" />
+    <Position X="17" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAhAAAAIAQAAAAEAAAAAACAAAABgAAAAQAAQAAAAUA=</HashCode>
       <FileName>Movement.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Account" />
+      <Field Name="account" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.Payment">
-    <Position X="32" Y="1.75" Width="1.5" />
+    <Position X="15.5" Y="15.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAxAgAAIAIAAAAAAAAAACCAAAAggAAAAAAAAAAAEQA=</HashCode>
+      <HashCode>AAAwAgAAIAYAAAAEAAAAACCAAAAggAAAAAAAAAAAEAA=</HashCode>
       <FileName>Payment.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -142,18 +135,18 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.Person">
-    <Position X="38.75" Y="1.75" Width="1.5" />
+    <Position X="9.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAFAAEABQCBABAAgBAQAQAwAAEAIAAAEAAAgLAAAICg=</HashCode>
+      <HashCode>AAFAAEABQiBABAIgAEQAQAgAAEAIAAAEAAAgLAAAICg=</HashCode>
       <FileName>Person.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Addresses" />
       <Property Name="PhoneNumbers" />
+      <Property Name="Addresses" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Antem.Models.PhoneNumber">
-    <Position X="9.5" Y="1.75" Width="1.5" />
+    <Position X="11.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAQAAAAEAAAAAAAAABAAAAAQAAAACAAAA=</HashCode>
       <FileName>PhoneNumber.cs</FileName>
@@ -163,9 +156,9 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Antem.Models.Product">
-    <Position X="18.5" Y="1.75" Width="1.5" />
+    <Position X="0.5" Y="15.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAIAAAAA=</HashCode>
+      <HashCode>gAAAAAAAAAAAAAAAAgAAAAYAAAAEAAAAAAAAAIAAAAA=</HashCode>
       <FileName>Product.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -173,7 +166,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Antem.Models.Retention">
-    <Position X="25.25" Y="1.75" Width="1.5" />
+    <Position X="9.5" Y="20.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAADAAAAAwQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Retention.cs</FileName>
@@ -182,39 +175,18 @@
       <Property Name="Applied" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="Antem.Models.Roles">
-    <Position X="34.25" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAEEAAAAA=</HashCode>
-      <FileName>Roles.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Property Name="UsersInRole" />
-    </ShowAsCollectionAssociation>
-  </Class>
   <Class Name="Antem.Models.State">
-    <Position X="41" Y="1.75" Width="1.5" />
+    <Position X="6.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEgAAAAIAAAAAAAAAAAAQAAAAEAAAAAAAAAAAABAA=</HashCode>
+      <HashCode>AAAAgAAAAIAAAAAAAAAAAAQAAAAUAAAAEAAAAAAAAAA=</HashCode>
       <FileName>State.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Counties" />
       <Property Name="People" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="Antem.Models.Users">
-    <Position X="11.75" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>QCAAAAAEACgMRAAAgQAAAEAQAggEAABCAAAQAAQAAAA=</HashCode>
-      <FileName>Users.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Property Name="Roles" />
-    </ShowAsCollectionAssociation>
-  </Class>
   <Class Name="Antem.Models.WithdrawableAccount">
-    <Position X="2.75" Y="7" Width="1.5" />
+    <Position X="15" Y="10.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>WithdrawableAccount.cs</FileName>

@@ -57,6 +57,11 @@ namespace Antem.Parts
                 }
             }
         }
+
+        public bool isActive
+        {
+            get { return transaction.IsActive; }
+        }
     }
 }
 

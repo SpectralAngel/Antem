@@ -17,5 +17,7 @@ namespace Antem.Parts
         /// be persisted
         /// </summary>
         void Rollback();
+
+        bool isActive { get; }
     }
 }

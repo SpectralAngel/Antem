@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Antem.Web.Models.UI
+namespace Antem.Web.Models
 {
-    public class MemberEditModel
+    public class MemberViewModel
     {
         public int Id { get; set; }
 
+        [Required]
         public String Identification { get; set; }
 
         public string FirstName { get; set; }

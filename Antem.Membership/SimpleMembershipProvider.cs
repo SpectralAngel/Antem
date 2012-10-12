@@ -228,7 +228,7 @@ namespace Antem.Membership
                     if (String.Equals(accountConfirmationToken, membership.ConfirmationToken, StringComparison.Ordinal))
                     {
                         membership.IsConfirmed = true;
-                        membershipRepository.Save(membership);
+                        // membershipRepository.Save(membership);
                         unit.Commit();
                         return true;
                     }
@@ -258,10 +258,10 @@ namespace Antem.Membership
                 var memberships = membershipRepository.Where(m => m.ConfirmationToken.Equals(accountConfirmationToken, StringComparison.Ordinal)).ToList();
                 Debug.Assert(memberships.Count < 2, "By virtue of the fact that the ConfirmationToken is random and unique, we can never have two tokens that are identical.");
                 var membership = memberships.First();
-                membership.IsConfirmed = true;
                 try
                 {
-                    membershipRepository.Save(membership);
+                    membership.IsConfirmed = true;
+                    // membershipRepository.Save(membership);
                     unit.Commit();
                     return membership.IsConfirmed;
                 }
@@ -336,7 +336,7 @@ namespace Antem.Membership
                 }
                 catch
                 {
-                    throw new MembershipCreateUserException(MembershipCreateStatus.ProviderError);
+                    throw;
                 }
                 return token;
             }
@@ -354,23 +354,23 @@ namespace Antem.Membership
             var oauth = GetOAuth(provider, providerUserId);
             using (var unit = unitOfWork.CreateExport().Value)
             {
-                if (oauth == null)
-                {
-                    oauth = new OAuthMembership()
-                    {
-                        Provider = provider,
-                        ProviderUserId = providerUserId,
-                        User = user
-                    };
-                    oAuthMembershipRepository.Save(oauth);
-                }
-                else
-                {
-                    oauth.User = user;
-                    oAuthMembershipRepository.Update(oauth);
-                }
                 try
                 {
+                    if (oauth == null)
+                    {
+                        oauth = new OAuthMembership()
+                        {
+                            Provider = provider,
+                            ProviderUserId = providerUserId,
+                            User = user
+                        };
+                        oAuthMembershipRepository.Save(oauth);
+                    }
+                    else
+                    {
+                        oauth.User = user;
+                        // oAuthMembershipRepository.Update(oauth);
+                    }
                     unit.Commit();
                 }
                 catch (Exception)
@@ -1080,21 +1080,21 @@ namespace Antem.Membership
             bool verificationSucceeded = (membership.Password != null && Crypto.VerifyHashedPassword(membership.Password, password));
             using (var unit = unitOfWork.CreateExport().Value)
             {
-                if (verificationSucceeded)
-                {
-                    membership.PasswordFailuresSinceLastSucces = 0;
-                }
-                else
-                {
-                    if (membership.PasswordFailuresSinceLastSucces != -1)
-                    {
-                        membership.PasswordFailuresSinceLastSucces++;
-                        membership.LastPasswordFailure = DateTime.UtcNow;
-                    }
-                }
                 try
                 {
-                    membershipRepository.Update(membership);
+                    if (verificationSucceeded)
+                    {
+                        membership.PasswordFailuresSinceLastSucces = 0;
+                    }
+                    else
+                    {
+                        if (membership.PasswordFailuresSinceLastSucces != -1)
+                        {
+                            membership.PasswordFailuresSinceLastSucces++;
+                            membership.LastPasswordFailure = DateTime.UtcNow;
+                        }
+                    }
+                    // membershipRepository.Update(membership);
                     unit.Commit();
                 }
                 catch (Exception)
@@ -1148,7 +1148,6 @@ namespace Antem.Membership
             var membership = membershipRepository.Where(m => m.User == user).Single();
             return membership.Password;
         }
-
         private bool SetPassword(User user, string newPassword)
         {
             string hashedPassword = Crypto.HashPassword(newPassword);
@@ -1159,12 +1158,11 @@ namespace Antem.Membership
 
             using (var unit = unitOfWork.CreateExport().Value)
             {
-                var membership = user.Memberships.First();
-                membership.Password = hashedPassword;
-                membership.PasswordChangeDate = DateTime.UtcNow;
                 try
                 {
-                    membershipRepository.Save(membership);
+                    var membership = user.Memberships.First();
+                    membership.Password = hashedPassword;
+                    membership.PasswordChangeDate = DateTime.UtcNow;
                     unit.Commit();
                     return true;
                 }
