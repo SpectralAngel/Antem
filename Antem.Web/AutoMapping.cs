@@ -6,9 +6,15 @@ using AutoMapper;
 using Antem.Web.Models;
 using Antem.Models;
 using Antem.Composition.Mvc;
+using Antem.Web.Resolvers;
+using Antem.Parts;
 
 namespace Antem.Web
 {
+    /// <summary>
+    /// Helps configuring the various mappings used by AutoMapper to convert
+    /// between the various ViewModels and Models used in the application
+    /// </summary>
     public class AutoMapping
     {
         public void Configure()
@@ -18,7 +24,10 @@ namespace Antem.Web
             Mapper.AssertConfigurationIsValid();
         }
 
-        private static void MemberMappings()
+        /// <summary>
+        /// Configures the various mappers where <see cref="Member"/> is involved
+        /// </summary>
+        public static void MemberMappings()
         {
             Mapper.CreateMap<MemberViewModel, Member>()
                 .ForMember(dto => dto.Loans, opt => opt.Ignore())
@@ -32,13 +41,16 @@ namespace Antem.Web
 
                 .ForMember(dto => dto.Branch,
                            opt => opt.ResolveUsing<ValueResolver<MemberViewModel, Branch>>()
-                               .ConstructedBy(() => CompositionProvider.Current.GetExport<ValueResolver<MemberViewModel, Branch>>()))
+                            .ConstructedBy(() =>new RepositoryResolver<MemberViewModel, Branch>(
+                                CompositionProvider.Current.GetExport<IRepository<Branch>>())))
                 .ForMember(dto => dto.State,
                            opt => opt.ResolveUsing<ValueResolver<MemberViewModel, State>>()
-                               .ConstructedBy(() => CompositionProvider.Current.GetExport<ValueResolver<MemberViewModel, State>>()))
+                            .ConstructedBy(() => new RepositoryResolver<MemberViewModel, State>(
+                                CompositionProvider.Current.GetExport<IRepository<State>>())))
                 .ForMember(dto => dto.Town,
                            opt => opt.ResolveUsing<ValueResolver<MemberViewModel, Town>>()
-                               .ConstructedBy(() => CompositionProvider.Current.GetExport<ValueResolver<MemberViewModel, Town>>()));
+                            .ConstructedBy(() => new RepositoryResolver<MemberViewModel, Town>(
+                                CompositionProvider.Current.GetExport<IRepository<Town>>())));
         }
 
         private static void ViewModelMappings()
@@ -52,7 +64,8 @@ namespace Antem.Web
 
                 .ForMember(dto => dto.State,
                            opt => opt.ResolveUsing<ValueResolver<TownViewModel, State>>()
-                               .ConstructedBy(() => CompositionProvider.Current.GetExport<ValueResolver<TownViewModel, State>>()));
+                               .ConstructedBy(() => new RepositoryResolver<TownViewModel, State>(
+                                CompositionProvider.Current.GetExport<IRepository<State>>())));
 
             Mapper.CreateMap<State, StateViewModel>()
                 .ForSourceMember(src => src.Towns, opt => opt.Ignore())

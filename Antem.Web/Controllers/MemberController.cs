@@ -1,83 +1,64 @@
 ﻿using Antem.Models;
 using Antem.Parts;
+using Antem.Web.Filters;
 using Antem.Web.Models;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Composition;
-using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Antem.Web.Controllers
 {
+    [Transaction]
     public class MemberController : Controller
     {
         IRepository<Member> repository;
-        ExportFactory<IUnitOfWork> factory;
         //
         // GET: /Member/
-
-        [ImportingConstructor]
-        public MemberController(IRepository<Member> repo,
-            ExportFactory<IUnitOfWork> factory)
+        public MemberController(IRepository<Member> repo)
         {
             repository = repo;
-            this.factory = factory;
+            AutoMapping.MemberMappings();
         }
 
         public ActionResult Index()
         {
-            dynamic status = new ExpandoObject();
-            status.Count = repository.Count();
-            return View(status);
-        }
-
-        //
-        // GET: /Member/Details/5
-
-        public ActionResult Details(int id)
-        {
+            ViewBag.Count = repository.Count();
             return View();
         }
 
         //
-        // GET: /Member/Create
-
-        public ActionResult Create()
+        // GET: /Member/Details/5
+        public ActionResult Details(int id)
         {
-            var member = new Member();
-
+            var member = repository.Get(id);
             return View(member);
         }
 
         //
-        // POST: /Member/Create
+        // GET: /Member/Create
+        public ActionResult Create()
+        {
+            ViewData["State"] = new SelectList(new List<State>(), "State", "State");
+            ViewData["Town"] = new SelectList(new List<Town>(), "Town", "Town");
+            return View();
+        }
 
+        //
+        // POST: /Member/Create
         [HttpPost]
         public ActionResult Create(MemberViewModel member)
         {
-            using (var unitOfWork = factory.CreateExport().Value)
-            {
-                try
-                {
-                    var newMember = Mapper.Map<MemberViewModel, Member>(member);
-                    repository.Save(newMember);
-                    unitOfWork.Commit();
-                    return RedirectToAction("Index");
-                }
-                catch(Exception ex)
-                {
-                    unitOfWork.Rollback();
-                    throw ex;
-                }
-            }
+            var newMember = Mapper.Map<MemberViewModel, Member>(member);
+            repository.Save(newMember);
+            return RedirectToAction("Index");
         }
 
         //
         // GET: /Member/Edit/5
-
         public ActionResult Edit(int id)
         {
             var member = repository.Get(id);
@@ -86,7 +67,6 @@ namespace Antem.Web.Controllers
 
         //
         // POST: /Member/Edit/5
-
         [HttpPost]
         public ActionResult Edit(Member member)
         {

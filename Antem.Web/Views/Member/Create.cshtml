@@ -1,0 +1,151 @@
+﻿@model Antem.Web.Models.MemberViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>MemberViewModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Identification)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Identification)
+            @Html.ValidationMessageFor(model => model.Identification)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Sex)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Sex)
+            @Html.ValidationMessageFor(model => model.Sex)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Birthday)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Birthday)
+            @Html.ValidationMessageFor(model => model.Birthday)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CivilState)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CivilState)
+            @Html.ValidationMessageFor(model => model.CivilState)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Profession)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Profession)
+            @Html.ValidationMessageFor(model => model.Profession)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.State)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("State")
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Town)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Town")
+            @Html.ValidationMessageFor(model => model.Town)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Branch)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Branch)
+            @Html.ValidationMessageFor(model => model.Branch)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Retirement)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Retirement)
+            @Html.ValidationMessageFor(model => model.Retirement)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsActive)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsActive)
+            @Html.ValidationMessageFor(model => model.IsActive)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Joined)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Joined)
+            @Html.ValidationMessageFor(model => model.Joined)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.getJSON('/api/state/get', function (data) {
+            $.each(data, function (i, state) {
+                $('<option />', { text: state.Name, val: state.Id })
+                .appendTo('#State');
+            });
+            $('#State').change();
+        });
+        $("#State").change(function (e) {
+            $("#Town").empty();
+            $.getJSON('/api/town/state/' + $("#State").val(), function (data) {
+                $.each(data, function (i, town) {
+                    $('<option />', { text: town.Name, val: town.Id })
+                    .appendTo('#Town');
+                });
+            });
+        });
+    });
+</script>
+}

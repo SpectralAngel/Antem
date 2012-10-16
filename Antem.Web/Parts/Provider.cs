@@ -29,10 +29,6 @@ namespace Antem.Parts
                     session = SessionFactory.OpenSession();
                 return session;
             }
-            set
-            {
-                session = value;
-            }
         }
 
         public virtual ISessionFactory BuildSessionFactory()

@@ -22,9 +22,9 @@ namespace Antem.Web.Controllers.API
         }
 
         // GET api/state
-        public IQueryable<State> Get()
+        public IEnumerable<StateViewModel> Get()
         {
-            return repository;
+            return Mapper.Map<IEnumerable<State>, IEnumerable<StateViewModel>>(repository.ToList());
         }
 
         // GET api/state/5

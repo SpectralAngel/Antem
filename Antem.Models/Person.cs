@@ -6,8 +6,8 @@ using System.Text;
 namespace Antem.Models
 {
     /// <summary>
-    /// Representa una Persona cualquiera en el sistema, permitiendo que la
-    /// misma tome varias funciones sin necesidad de repetir los datos.
+    /// Represents a person on any place of the application, in order
+    /// to avoid repeating data
     /// </summary>
     public class Person : Entity<int>
     {
@@ -24,6 +24,10 @@ namespace Antem.Models
         private IList<Address> addresses = new List<Address>();
         private IList<Email> emails = new List<Email>();
 
+        /// <summary>
+        /// According to Honduran standards, it must be a 13 digit number,
+        /// which most people divides using dashes
+        /// </summary>
         public virtual String Identification
         {
             get { return identification; }

@@ -1,23 +1,23 @@
 ﻿using Antem.Models;
 using Antem.Parts;
+using Antem.Web.Filters;
 using System;
 using System.Collections.Generic;
 using System.Composition;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace Antem.Web.Controllers.API
 {
+    [Transaction]
     public class BranchController : ApiController
     {
         IRepository<Branch> repository;
-        ExportFactory<IUnitOfWork> factory;
 
         public BranchController(IRepository<Branch> repo)
         {
-
+            repository = repo;
         }
 
         // GET api/branch
@@ -35,19 +35,7 @@ namespace Antem.Web.Controllers.API
         // POST api/branch
         public void Post(Branch branch)
         {
-            using (var unit = factory.CreateExport().Value)
-            {
-                try
-                {
-                    repository.Save(branch);
-                    unit.Commit();
-                }
-                catch (Exception)
-                {
-                    unit.Rollback();
-                    throw;
-                }
-            }
+            repository.Save(branch);
         }
 
         // PUT api/branch/5
@@ -59,20 +47,8 @@ namespace Antem.Web.Controllers.API
         // DELETE api/branch/5
         public void Delete(int id)
         {
-            using (var unit = factory.CreateExport().Value)
-            {
-                try
-                {
-                    var branch = repository.Get(id);
-                    repository.Delete(branch);
-                    unit.Commit();
-                }
-                catch (Exception)
-                {
-                    unit.Rollback();
-                    throw;
-                }
-            }
+            var branch = repository.Get(id);
+            repository.Delete(branch);
         }
     }
 }

@@ -16,13 +16,11 @@ namespace Antem.Web.Controllers.API
     public class TownController : ApiController
     {
         IRepository<Town> repository { get; set; }
-        IRepository<State> states { get; set; }
 
         public TownController(IRepository<Town> repo,
             IRepository<State> states)
         {
             repository = repo;
-            this.states = states;
         }
 
         [HttpGet]
@@ -38,10 +36,9 @@ namespace Antem.Web.Controllers.API
         }
 
         // POST api/town
-        public void Post(Town town, int state)
+        public void Post(TownViewModel town)
         {
-
-            town.State = states.Get(state);
+            Mapper.Map<Town>(town);
             repository.Save(town);
         }
 
