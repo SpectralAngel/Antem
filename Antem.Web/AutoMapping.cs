@@ -43,6 +43,10 @@ namespace Antem.Web
                            opt => opt.ResolveUsing<ValueResolver<MemberViewModel, Branch>>()
                             .ConstructedBy(() =>new RepositoryResolver<MemberViewModel, Branch>(
                                 CompositionProvider.Current.GetExport<IRepository<Branch>>())))
+                .ForMember(dto => dto.PaymentMethod,
+                           opt => opt.ResolveUsing<ValueResolver<MemberViewModel, PaymentMethod>>()
+                            .ConstructedBy(() => new RepositoryResolver<MemberViewModel, PaymentMethod>(
+                                CompositionProvider.Current.GetExport<IRepository<PaymentMethod>>())))
                 .ForMember(dto => dto.State,
                            opt => opt.ResolveUsing<ValueResolver<MemberViewModel, State>>()
                             .ConstructedBy(() => new RepositoryResolver<MemberViewModel, State>(
@@ -58,10 +62,10 @@ namespace Antem.Web
             Mapper.CreateMap<Town, TownViewModel>()
                 .ForSourceMember(src => src.People, opt => opt.Ignore())
                 .ForMember(dto => dto.State, opt => opt.MapFrom(src => src.State.Id));
+
             Mapper.CreateMap<TownViewModel, Town>()
                 .ForMember(dto => dto.Id, opt => opt.Ignore())
                 .ForMember(dto => dto.People, opt => opt.Ignore())
-
                 .ForMember(dto => dto.State,
                            opt => opt.ResolveUsing<ValueResolver<TownViewModel, State>>()
                                .ConstructedBy(() => new RepositoryResolver<TownViewModel, State>(
@@ -70,6 +74,10 @@ namespace Antem.Web
             Mapper.CreateMap<State, StateViewModel>()
                 .ForSourceMember(src => src.Towns, opt => opt.Ignore())
                 .ForSourceMember(src => src.People, opt => opt.Ignore());
+
+            Mapper.CreateMap<PaymentMethod, PaymentMethodViewModel>()
+                .ForSourceMember(src => src.Members, opt => opt.Ignore())
+                .ForSourceMember(src => src.Invoices, opt => opt.Ignore());
         }
     }
 }

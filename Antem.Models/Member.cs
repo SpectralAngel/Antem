@@ -13,6 +13,13 @@ namespace Antem.Models
         private IList<Beneficiary> beneficiaries = new List<Beneficiary>();
         private IList<Invoice> invoices = new List<Invoice>();
         private IList<Loan> loans = new List<Loan>();
+        private PaymentMethod paymentMethod;
+
+        public PaymentMethod PaymentMethod
+        {
+            get { return paymentMethod; }
+            set { paymentMethod = value; }
+        }
 
         public virtual Branch Branch
         {

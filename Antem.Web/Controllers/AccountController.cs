@@ -175,7 +175,7 @@ namespace Antem.Web.Controllers
             else
             {
                 // User does not have a local password so remove any validation errors caused by a missing
-                // OldPassword field
+                // OldPassword paymentMethod
                 ModelState state = ModelState["OldPassword"];
                 if (state != null)
                 {

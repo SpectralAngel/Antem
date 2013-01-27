@@ -16,6 +16,13 @@ namespace Antem.Models
         private decimal principal;
         private decimal interest;
         private bool invoiceCreated;
+        private Invoice invoice;
+
+        public Invoice Invoice
+        {
+            get { return invoice; }
+            set { invoice = value; }
+        }
 
         public virtual DateTime Day
         {

@@ -31,6 +31,8 @@ namespace Antem.Web.Models
 
         public int Branch { get; set; }
 
+        public int PaymentMethod { get; set; }
+
         public DateTime Retirement { get; set; }
 
         public bool IsActive { get; set; }

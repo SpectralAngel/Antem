@@ -14,6 +14,20 @@ namespace Antem.Models
         private DateTime day;
         private IList<Charge> cargos = new List<Charge>();
         private User cashier;
+        private PaymentMethod paymentMethod;
+        private IList<Payment> payments;
+
+        public IList<Payment> Payments
+        {
+            get { return payments; }
+            set { payments = value; }
+        }
+
+        public PaymentMethod PaymentMethod
+        {
+            get { return paymentMethod; }
+            set { paymentMethod = value; }
+        }
 
         public virtual User Cashier
         {

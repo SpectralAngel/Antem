@@ -18,11 +18,16 @@ namespace Antem.Parts
             return principal * (decimal)anualRate / 1200;
         }
 
+        public static decimal QuarterlyInterest(double anualRate, decimal principal)
+        {
+            return principal * (decimal)anualRate / 400;
+        }
+
         /// <summary>
         /// Calcula el pago que se deberá efectuar tomando en cuenta el interes
         /// compuesto
         /// </summary>
-        /// <param name="anualRate"></param>
+        /// <param name="anualRate">The rate charged per year on a Loan</param>
         /// <param name="principal"></param>
         /// <param name="paymentNumber"></param>
         /// <returns></returns>

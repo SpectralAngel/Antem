@@ -13,6 +13,7 @@ using System.Web.Mvc;
 namespace Antem.Web.Controllers
 {
     [Transaction]
+    [Authorize]
     public class MemberController : Controller
     {
         IRepository<Member> repository;
@@ -68,12 +69,12 @@ namespace Antem.Web.Controllers
         //
         // POST: /Member/Edit/5
         [HttpPost]
-        public ActionResult Edit(Member member)
+        public ActionResult Edit(MemberViewModel member)
         {
             try
             {
-                // TODO: Add update logic here
-
+                var entity = repository.Get(member.Id);
+                Mapper.Map<MemberViewModel, Member>(member, entity);
                 return RedirectToAction("Index");
             }
             catch
